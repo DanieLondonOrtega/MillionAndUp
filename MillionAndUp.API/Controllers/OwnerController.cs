@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MillionAndUp.API.Models;
 using MillionAndUp.Aplication.Dtos;
@@ -6,6 +7,7 @@ using MillionAndUp.Aplication.Interfaces;
 
 namespace MillionAndUp.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OwnerController : ControllerBase

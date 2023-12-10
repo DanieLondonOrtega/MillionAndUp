@@ -39,6 +39,17 @@ namespace MillionAndUp.Infrastructure.DataAccess.Repository
             }
             return false;
         }
+
+        public bool Delete(string usuario)
+        {
+            TEntity entityDelete = _entities.Find(usuario);
+            if (entityDelete != null)
+            {
+                _entities.Remove(entityDelete);
+                return _dataContext.SaveChanges() > 0;
+            }
+            return false;
+        }
         public bool Update(TEntity entity)
         {
             _entities.Update(entity);

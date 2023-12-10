@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MillionAndUp.Common\MillionAndUp.Common.csproj" />
     <ProjectReference Include="..\MillionAndUp.Domain\MillionAndUp.Domain.csproj" />
     <ProjectReference Include="..\MillionAndUp.Infrastructure\MillionAndUp.Infrastructure.csproj" />
   </ItemGroup>

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MillionAndUp.Domain.Entities
+namespace MillionAndUp.Aplication.Dtos
 {
     /// <summary>
-    /// Class with the information for authentication
+    /// DTO for the transfer of user data between the entry and the domain
     /// </summary>
-    public class Login
+    public class UserDto
     {
         public string Usuario { get; set; }
         public string Password { get; set; }

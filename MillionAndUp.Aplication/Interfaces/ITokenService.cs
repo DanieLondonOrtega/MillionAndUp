@@ -9,7 +9,6 @@ namespace MillionAndUp.Aplication.Interfaces
     {
         public (bool status, string jwt) GenerateToken(InfoTokenDto entity);
         public bool IsUser(InfoTokenDto entity);
-
-
+        UserDto GetByUsuario(string usuario);
     }
 }
