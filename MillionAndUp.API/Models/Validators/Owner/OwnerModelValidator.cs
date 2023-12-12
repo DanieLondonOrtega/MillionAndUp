@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace MillionAndUp.API.Models.Validators
+namespace MillionAndUp.API.Models.Validators.Owner
 {
     /// <summary>
     /// Class to validate the attributes of the Owner Model

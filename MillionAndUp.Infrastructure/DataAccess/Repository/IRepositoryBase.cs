@@ -13,5 +13,6 @@ namespace MillionAndUp.Infrastructure.DataAccess.Repository
         bool Delete(string usuario);
         Task<IQueryable<TEntity>> GetAll();
         Task<TEntity> GetById(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includeProperties);
+        void Clear();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using MillionAndUp.Aplication.Dtos;
 using MillionAndUp.Aplication.Interfaces;
 using MillionAndUp.Domain.Entities;
@@ -46,12 +45,12 @@ namespace MillionAndUp.Aplication.Services
                 throw new ArgumentNullException(String.Format(Constants.Constants.EntityIsRequerid, "Owner"));
 
             entity.IdOwner = Guid.NewGuid();
-            
+
             if (entity.File != null)
             {
                 var name = string.Format(Constants.Constants.RoutePhotoOwner, entity.IdOwner.ToString());
-                entity.Photo = _azureBlobStorageService.UploadAsync(name, entity.File).Result;                 
-            }            
+                entity.Photo = _azureBlobStorageService.UploadAsync(name, entity.File).Result;
+            }
             var obj = _mapper.Map<Owner>(entity);
             return _ownerRepository.Add(obj);
         }
@@ -64,16 +63,12 @@ namespace MillionAndUp.Aplication.Services
             if (entity.File != null)
             {
                 var name = string.Format(Constants.Constants.RoutePhotoOwner, entity.IdOwner.ToString());
-                bool imageExist = _azureBlobStorageService.ExistFileAsync(name);
-                if (imageExist)
-                {
-                    _azureBlobStorageService.DeleteAsync(name);
-                }
+                _azureBlobStorageService.DeleteAsync(name);
                 entity.Photo = _azureBlobStorageService.UploadAsync(name, entity.File).Result;
             }
 
             var obj = _mapper.Map<Owner>(entity);
-            return  _ownerRepository.Update(obj);
+            return _ownerRepository.Update(obj);
         }
     }
 }

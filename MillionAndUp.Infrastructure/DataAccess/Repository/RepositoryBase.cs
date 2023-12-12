@@ -67,5 +67,10 @@ namespace MillionAndUp.Infrastructure.DataAccess.Repository
             query = includeProperties.Aggregate(query, (current, include) => current.Include(include));
             return query.FirstOrDefault(where);
         }
+
+        public void Clear()
+        {
+            _dataContext.ChangeTracker.Clear();
+        }
     }
 }

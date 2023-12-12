@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using MillionAndUp.API.Models.Validators;
+using MillionAndUp.API.Models.Validators.Owner;
+using MillionAndUp.API.Models.Validators.Property;
 using MillionAndUp.Aplication.Interfaces;
 using MillionAndUp.Aplication.Services;
 using MillionAndUp.Infrastructure.DataAccess.Context;
 using MillionAndUp.Infrastructure.DataAccess.Repository;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +23,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-
     options.SwaggerDoc("v1", new OpenApiInfo {
         Version = "v1",
         Title = "Million And Up Prueba Tecnica",
@@ -29,7 +30,6 @@ builder.Services.AddSwaggerGen(options =>
         Contact = new OpenApiContact {
             Name = "Daniel Stiven Londoño Ortega",
             Email = "daniel.londono.ortega@gmail.com"
-
         }
     });
 
@@ -38,7 +38,7 @@ builder.Services.AddSwaggerGen(options =>
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
+        Scheme = "Bearer"       
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -54,7 +54,7 @@ builder.Services.AddSwaggerGen(options =>
             },
             new string [] { }
         }
-    });
+    });    
     // using System.Reflection;
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
@@ -64,11 +64,15 @@ builder.Services.AddDbContext<EntityDbContext>(options =>
 );
 builder.Services.AddSingleton<IAzureBlobStorageService,AzureBlobStorageService>();
 builder.Services.AddScoped<IOwnerService, OwnerService>();
+builder.Services.AddScoped<IPropertyService, PropertyService>();
 builder.Services.AddTransient(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<OwnerModelValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<OwnerUpdateModelValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<OwnerUpdateModelValidator>(); 
+builder.Services.AddValidatorsFromAssemblyContaining<PropertyModelValidatior>();
+builder.Services.AddValidatorsFromAssemblyContaining<PropertyUpdateModelValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<PropertyChangePriceModelValidator>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
 {

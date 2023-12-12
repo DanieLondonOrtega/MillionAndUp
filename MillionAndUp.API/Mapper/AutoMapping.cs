@@ -11,6 +11,11 @@ namespace MillionAndUp.API.Mapper
             CreateMap<OwnerModel, OwnerDto>().ReverseMap();
             CreateMap<OwnerDto, Owner>().ReverseMap();
             CreateMap<OwnerUpdateModel, OwnerDto>().ReverseMap();
+
+            CreateMap<PropertyModel, PropertyDto>().ReverseMap();
+            CreateMap<PropertyDto, Property>().ReverseMap();
+            CreateMap<PropertyUpdateModel, PropertyDto>().ReverseMap();
+            CreateMap<PropertyChangePriceModel, PropertyDto>().ReverseMap();
         }
     }
 }

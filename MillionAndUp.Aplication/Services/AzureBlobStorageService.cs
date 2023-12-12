@@ -18,10 +18,13 @@ namespace MillionAndUp.Aplication.Services
         public async Task DeleteAsync(string fileName)
         {
             var blobContainerClient = new BlobContainerClient(this.azureStorageConnectionString, Constants.Constants.AzureBlobStorageContainer);
-            var blobClient = blobContainerClient.GetBlobClient(fileName);
-            if (blobClient != null)
+            if (ExistFileAsync(fileName))
             {
-                await blobClient.DeleteAsync(); 
+                var blobClient = blobContainerClient.GetBlobClient(fileName);
+                if (blobClient != null)
+                {
+                    await blobClient.DeleteAsync();
+                } 
             }
         }
 
