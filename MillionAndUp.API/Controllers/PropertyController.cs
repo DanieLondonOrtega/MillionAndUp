@@ -45,6 +45,16 @@ namespace MillionAndUp.API.Controllers
         }
 
         /// <summary>
+        /// Get owner information by ID 
+        /// </summary>
+        [HttpGet("Property{filter}")]
+        public async Task<IActionResult> GetFilter(string filter)
+        {
+            var result = await _service.GetFilter(filter);
+            return Ok(result);
+        }
+
+        /// <summary>
         /// Insert a new Porperty
         /// </summary>
         [HttpPost]

@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MillionAndUp.API.Models.Validators.Owner;
 using MillionAndUp.API.Models.Validators.Property;
+using MillionAndUp.API.Models.Validators.PropertyImage;
 using MillionAndUp.Aplication.Interfaces;
 using MillionAndUp.Aplication.Services;
 using MillionAndUp.Infrastructure.DataAccess.Context;
@@ -65,6 +66,7 @@ builder.Services.AddDbContext<EntityDbContext>(options =>
 builder.Services.AddSingleton<IAzureBlobStorageService,AzureBlobStorageService>();
 builder.Services.AddScoped<IOwnerService, OwnerService>();
 builder.Services.AddScoped<IPropertyService, PropertyService>();
+builder.Services.AddScoped<IPropertyImageService, PropertyImageService>();
 builder.Services.AddTransient(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
@@ -73,6 +75,8 @@ builder.Services.AddValidatorsFromAssemblyContaining<OwnerUpdateModelValidator>(
 builder.Services.AddValidatorsFromAssemblyContaining<PropertyModelValidatior>();
 builder.Services.AddValidatorsFromAssemblyContaining<PropertyUpdateModelValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<PropertyChangePriceModelValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<PropertyImageModelValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<PropertyImageUpdateModelValidator>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
 {

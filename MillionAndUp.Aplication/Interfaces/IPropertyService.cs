@@ -11,6 +11,7 @@ namespace MillionAndUp.Aplication.Interfaces
         bool Put(PropertyDto entity);
         bool Delete(Guid id);
         Task<PropertyDto> Get(Guid id);
+        Task<IEnumerable<PropertyDto>> GetFilter(string filter);
         Task<IEnumerable<PropertyDto>> GetAll();
         bool ChangePrice(PropertyDto entity);
     }

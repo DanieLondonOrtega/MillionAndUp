@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MillionAndUp.Infrastructure.DataAccess.Context;
 
@@ -11,9 +12,10 @@ using MillionAndUp.Infrastructure.DataAccess.Context;
 namespace MillionAndUp.Infrastructure.Migrations
 {
     [DbContext(typeof(EntityDbContext))]
-    partial class EntityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231212051135_ChangeDefaultValueEnabled")]
+    partial class ChangeDefaultValueEnabled
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,10 +101,12 @@ namespace MillionAndUp.Infrastructure.Migrations
             modelBuilder.Entity("MillionAndUp.Domain.Entities.PropertyImage", b =>
                 {
                     b.Property<Guid>("IdPropertyImage")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool?>("Enabled")
+                    b.Property<Guid>("IdProperty")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Enabled")
                         .HasColumnType("bit")
                         .HasColumnName("Enabled");
 
@@ -110,10 +114,7 @@ namespace MillionAndUp.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("File");
 
-                    b.Property<Guid>("IdProperty")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("IdPropertyImage");
+                    b.HasKey("IdPropertyImage", "IdProperty");
 
                     b.HasIndex("IdProperty");
 
@@ -123,15 +124,14 @@ namespace MillionAndUp.Infrastructure.Migrations
             modelBuilder.Entity("MillionAndUp.Domain.Entities.PropertyTrace", b =>
                 {
                     b.Property<Guid>("IdPropertyTrace")
-                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdProperty")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateSale")
                         .HasColumnType("datetime2")
                         .HasColumnName("DateSale");
-
-                    b.Property<Guid>("IdProperty")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -149,7 +149,7 @@ namespace MillionAndUp.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("Value");
 
-                    b.HasKey("IdPropertyTrace");
+                    b.HasKey("IdPropertyTrace", "IdProperty");
 
                     b.HasIndex("IdProperty");
 

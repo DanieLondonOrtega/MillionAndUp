@@ -29,7 +29,12 @@ namespace MillionAndUp.Aplication.Services
             var result = await _propertyRepository.GetById(x => x.IdProperty == id);
             return _mapper.Map<PropertyDto>(result);
         }
-
+        public async Task<IEnumerable<PropertyDto>> GetFilter(string filter)
+        {
+            var result = await _propertyRepository.GetAll();
+            var query = result.Where(x => x.Name.Contains(filter) || x.Address.Contains(filter) || x.CodeInternal.Contains(filter));
+            return _mapper.Map<IEnumerable<PropertyDto>>(query);
+        }
         public async Task<IEnumerable<PropertyDto>> GetAll()
         {
             var result = await _propertyRepository.GetAll();

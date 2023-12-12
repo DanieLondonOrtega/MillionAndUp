@@ -12,15 +12,14 @@ namespace MillionAndUp.Infrastructure.DataAccess.Configurations
         public void Configure(EntityTypeBuilder<PropertyImage> builder)
         {
             builder.ToTable("tblPropertyImage");
-            builder.HasKey(x => new { x.IdPropertyImage, x.IdProperty });
+            builder.HasKey(x => new { x.IdPropertyImage });
 
             builder.Property(x => x.File)
                 .HasColumnName("File")
                 .IsRequired(false);
 
             builder.Property(e => e.Enabled)
-                .HasColumnName("Enabled")                
-                .HasDefaultValue(true);
+                .HasColumnName("Enabled");                
 
             builder.HasOne(x => x.Property)
                 .WithMany(x => x.Images)

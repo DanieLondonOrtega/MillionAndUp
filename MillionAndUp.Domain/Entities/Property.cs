@@ -1,5 +1,8 @@
 ﻿namespace MillionAndUp.Domain.Entities
 {
+    /// <summary>
+    /// Class Information Property.
+    /// </summary>
     public class Property
     {
         public Guid IdProperty { get; set; }

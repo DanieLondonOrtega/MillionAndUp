@@ -1,7 +1,7 @@
 ﻿namespace MillionAndUp.Domain.Entities
 {
     /// <summary>
-    /// Class Information Owner Property.
+    /// Class Information Owner.
     /// </summary>
     public class Owner
     {
