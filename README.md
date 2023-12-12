@@ -2,7 +2,7 @@
 Daniel Stiven Londoño Ortega
 daniel.londono.ortega@gmail.com
 
-#Arquitectura
+#Recursos
 - Arquitectura Hexagonal
 - DDD
 - EntityFramework Code First
