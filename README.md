@@ -15,6 +15,7 @@ daniel.londono.ortega@gmail.com
 - Swagger
 - .Net 6
 - SqlServer
+- NUnit
 
 #¡Recomendaciones Importante!
 
@@ -29,3 +30,4 @@ daniel.londono.ortega@gmail.com
 9. Generar token de seguridad con el usuario y contraseña registrados
 10. Iniciar APi del core (API)
 11. Auntenticar con el header de Bearer y el token generado anteriormente
+12. EL BackUp de la Base de datos esta en la carpeta InitBD, esto solo como plan de contigencia
