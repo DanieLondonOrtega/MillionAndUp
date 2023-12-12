@@ -44,8 +44,8 @@ namespace MillionAndUp.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Name");
 
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)")
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Photo");
 
                     b.HasKey("IdOwner");
@@ -99,22 +99,21 @@ namespace MillionAndUp.Infrastructure.Migrations
             modelBuilder.Entity("MillionAndUp.Domain.Entities.PropertyImage", b =>
                 {
                     b.Property<Guid>("IdPropertyImage")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool?>("Enabled")
+                        .HasColumnType("bit")
+                        .HasColumnName("Enabled");
+
+                    b.Property<string>("File")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("File");
 
                     b.Property<Guid>("IdProperty")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Enabled")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true)
-                        .HasColumnName("Enabled");
-
-                    b.Property<byte[]>("File")
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnName("File");
-
-                    b.HasKey("IdPropertyImage", "IdProperty");
+                    b.HasKey("IdPropertyImage");
 
                     b.HasIndex("IdProperty");
 
@@ -124,14 +123,15 @@ namespace MillionAndUp.Infrastructure.Migrations
             modelBuilder.Entity("MillionAndUp.Domain.Entities.PropertyTrace", b =>
                 {
                     b.Property<Guid>("IdPropertyTrace")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IdProperty")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateSale")
                         .HasColumnType("datetime2")
                         .HasColumnName("DateSale");
+
+                    b.Property<Guid>("IdProperty")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -149,11 +149,28 @@ namespace MillionAndUp.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("Value");
 
-                    b.HasKey("IdPropertyTrace", "IdProperty");
+                    b.HasKey("IdPropertyTrace");
 
                     b.HasIndex("IdProperty");
 
                     b.ToTable("tblPropertyTrace", "dbo");
+                });
+
+            modelBuilder.Entity("MillionAndUp.Domain.Entities.User", b =>
+                {
+                    b.Property<string>("Usuario")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)")
+                        .HasColumnName("Usuario");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Password");
+
+                    b.HasKey("Usuario");
+
+                    b.ToTable("tblUser", "dbo");
                 });
 
             modelBuilder.Entity("MillionAndUp.Domain.Entities.Property", b =>

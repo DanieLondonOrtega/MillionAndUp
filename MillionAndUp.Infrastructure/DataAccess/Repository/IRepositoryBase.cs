@@ -7,10 +7,12 @@ namespace MillionAndUp.Infrastructure.DataAccess.Repository
     /// </summary>
     public interface IRepositoryBase<TEntity> where TEntity : class
     {
-        bool Add (TEntity entity);
-        bool Update (TEntity entity);
-        bool Delete (object id);
-        Task<IQueryable<TEntity>> GetAll ();
+        bool Add(TEntity entity);
+        bool Update(TEntity entity);
+        bool Delete(object id);
+        bool Delete(string usuario);
+        Task<IQueryable<TEntity>> GetAll();
         Task<TEntity> GetById(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includeProperties);
+        void Clear();
     }
 }

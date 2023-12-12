@@ -13,13 +13,17 @@ namespace MillionAndUp.Aplication.Services
     {
         private readonly IRepositoryBase<Owner> _ownerRepository;
         private readonly IMapper _mapper;
-        public OwnerService(IRepositoryBase<Owner> ownerRepository, IMapper mapper)
+        private readonly IAzureBlobStorageService _azureBlobStorageService;
+        public OwnerService(IRepositoryBase<Owner> ownerRepository, IMapper mapper, IAzureBlobStorageService azureBlobStorageService)
         {
             _ownerRepository = ownerRepository;
             _mapper = mapper;
+            _azureBlobStorageService = azureBlobStorageService;
         }
         public bool Delete(Guid id)
         {
+            var name = string.Format(Constants.Constants.RoutePhotoOwner, id.ToString());
+            _azureBlobStorageService.DeleteAsync(name);
             return _ownerRepository.Delete(id);
         }
 
@@ -38,9 +42,15 @@ namespace MillionAndUp.Aplication.Services
         public bool Post(OwnerDto entity)
         {
             if (entity == null)
-                throw new ArgumentNullException("Owner is requerid");
+                throw new ArgumentNullException(String.Format(Constants.Constants.EntityIsRequerid, "Owner"));
 
-            entity.IdOwner = Guid.NewGuid();            
+            entity.IdOwner = Guid.NewGuid();
+
+            if (entity.File != null)
+            {
+                var name = string.Format(Constants.Constants.RoutePhotoOwner, entity.IdOwner.ToString());
+                entity.Photo = _azureBlobStorageService.UploadAsync(name, entity.File).Result;
+            }
             var obj = _mapper.Map<Owner>(entity);
             return _ownerRepository.Add(obj);
         }
@@ -48,10 +58,17 @@ namespace MillionAndUp.Aplication.Services
         public bool Put(OwnerDto entity)
         {
             if (entity == null)
-                throw new ArgumentNullException("Owner is requerid");
+                throw new ArgumentNullException(String.Format(Constants.Constants.EntityIsRequerid, "Owner"));
+
+            if (entity.File != null)
+            {
+                var name = string.Format(Constants.Constants.RoutePhotoOwner, entity.IdOwner.ToString());
+                _azureBlobStorageService.DeleteAsync(name);
+                entity.Photo = _azureBlobStorageService.UploadAsync(name, entity.File).Result;
+            }
 
             var obj = _mapper.Map<Owner>(entity);
-            return  _ownerRepository.Update(obj);
+            return _ownerRepository.Update(obj);
         }
     }
 }

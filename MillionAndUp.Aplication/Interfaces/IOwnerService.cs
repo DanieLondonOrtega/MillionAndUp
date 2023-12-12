@@ -1,5 +1,4 @@
 ﻿using MillionAndUp.Aplication.Dtos;
-using MillionAndUp.Domain.Entities;
 
 namespace MillionAndUp.Aplication.Interfaces
 {

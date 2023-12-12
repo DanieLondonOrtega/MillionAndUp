@@ -1,7 +1,7 @@
 ﻿namespace MillionAndUp.Domain.Entities
 {
     /// <summary>
-    /// Class Information Owner Property.
+    /// Class Information Owner.
     /// </summary>
     public class Owner
     {
@@ -18,11 +18,11 @@
         /// <summary>
         /// Gets or sets the address owner.
         /// </summary>
-        public string? Address { get; set; }
+        public string Address { get; set; }
         /// <summary>
         /// Gets or sets the photo owner.
         /// </summary>
-        public byte[]? Photo { get; set; }
+        public string Photo { get; set; }
 
         /// <summary>
         /// Gets or sets the birthday owner.

@@ -12,7 +12,7 @@ namespace MillionAndUp.Infrastructure.DataAccess.Configurations
         public void Configure(EntityTypeBuilder<PropertyTrace> builder)
         {
             builder.ToTable("tblPropertyTrace");
-            builder.HasKey(x => new { x.IdPropertyTrace, x.IdProperty });
+            builder.HasKey(x => new { x.IdPropertyTrace });
 
             builder.Property(x => x.DateSale)
                 .HasColumnName("DateSale")
