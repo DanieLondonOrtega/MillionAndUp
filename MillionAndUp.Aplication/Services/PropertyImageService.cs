@@ -6,15 +6,18 @@ using MillionAndUp.Infrastructure.DataAccess.Repository;
 
 namespace MillionAndUp.Aplication.Services
 {
+    /// <summary>
+    /// Class to manage the business logic regarding property image
+    /// </summary>
     public class PropertyImageService : IPropertyImageService
     {
-        private readonly IRepositoryBase<PropertyImage> _propertyimageRepository;
+        private readonly IRepositoryBase<PropertyImage> _propertyImageRepository;
         private readonly IMapper _mapper;
         private readonly IAzureBlobStorageService _azureBlobStorageService;
 
         public PropertyImageService(IRepositoryBase<PropertyImage> propertyimageRepository, IMapper mapper, IAzureBlobStorageService azureBlobStorageService)
         {
-            _propertyimageRepository = propertyimageRepository;
+            _propertyImageRepository = propertyimageRepository;
             _mapper = mapper;
             _azureBlobStorageService = azureBlobStorageService;
         }
@@ -22,18 +25,18 @@ namespace MillionAndUp.Aplication.Services
         {
             var name = string.Format(Constants.Constants.RouteImageProperty, id.ToString());
             _azureBlobStorageService.DeleteAsync(name);
-            return _propertyimageRepository.Delete(id);
+            return _propertyImageRepository.Delete(id);
         }
 
         public async Task<PropertyImageDto> Get(Guid id)
         {
-            var result = await _propertyimageRepository.GetById(x => x.IdPropertyImage == id);
+            var result = await _propertyImageRepository.GetById(x => x.IdPropertyImage == id);
             return _mapper.Map<PropertyImageDto>(result);
         }
 
         public async Task<IEnumerable<PropertyImageDto>> GetAllById(Guid id)
         {
-            var result = await _propertyimageRepository.GetAll();
+            var result = await _propertyImageRepository.GetAll();
             var obj = result.Where(x => x.IdProperty == id);
             return _mapper.Map<IEnumerable<PropertyImageDto>>(obj);
         }
@@ -51,7 +54,7 @@ namespace MillionAndUp.Aplication.Services
                 entity.File = _azureBlobStorageService.UploadAsync(name, entity.UploadFile).Result;
             }
             var obj = _mapper.Map<PropertyImage>(entity);
-            return _propertyimageRepository.Add(obj);
+            return _propertyImageRepository.Add(obj);
         }
 
         public bool Put(PropertyImageDto entity)
@@ -66,7 +69,7 @@ namespace MillionAndUp.Aplication.Services
                 entity.File = _azureBlobStorageService.UploadAsync(name, entity.UploadFile).Result;
             }
             var obj = _mapper.Map<PropertyImage>(entity);
-            return _propertyimageRepository.Update(obj);
+            return _propertyImageRepository.Update(obj);
         }
     }
 }

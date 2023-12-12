@@ -16,6 +16,9 @@ using MillionAndUp.Infrastructure.DataAccess.Repository;
 
 namespace MillionAndUp.Aplication.Services
 {
+    /// <summary>
+    /// Class to manage the business logic generate adn validate token
+    /// </summary>
     public class TokenService : ITokenService
     {
         private readonly IRepositoryBase<User> _userRepository;

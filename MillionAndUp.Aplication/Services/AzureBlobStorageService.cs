@@ -6,6 +6,9 @@ using MillionAndUp.Aplication.Interfaces;
 
 namespace MillionAndUp.Aplication.Services
 {
+    /// <summary>
+    /// Class to manage the business logic regarding azure blob storage
+    /// </summary>
     public class AzureBlobStorageService : IAzureBlobStorageService
     {
         private readonly IConfiguration _configuration;

@@ -2,6 +2,9 @@
 
 namespace MillionAndUp.Aplication.Interfaces
 {
+    /// <summary>
+    /// Interface to implement in the property image service
+    /// </summary>
     public interface IPropertyImageService
     {
         bool Post(PropertyImageDto entity);

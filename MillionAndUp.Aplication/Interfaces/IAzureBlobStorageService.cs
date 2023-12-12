@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace MillionAndUp.Aplication.Interfaces
 {
+    /// <summary>
+    /// Interface to implement in the azure blob storage service
+    /// </summary>
     public interface IAzureBlobStorageService
     {
         Task<string> UploadAsync(string fileName, IFormFile file);

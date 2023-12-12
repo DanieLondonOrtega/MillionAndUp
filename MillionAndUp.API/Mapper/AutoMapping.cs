@@ -20,6 +20,10 @@ namespace MillionAndUp.API.Mapper
             CreateMap<PropertyImageModel, PropertyImageDto>().ReverseMap();
             CreateMap<PropertyImageDto, PropertyImage>().ReverseMap();
             CreateMap<PropertyImageUpdateModel, PropertyImageDto>().ReverseMap();
+
+            CreateMap<PropertyTraceModel, PropertyTraceDto>().ReverseMap();
+            CreateMap<PropertyTraceDto, PropertyTrace>().ReverseMap();
+            CreateMap<PropertyTraceUpdateModel, PropertyTraceDto>().ReverseMap();
         }
     }
 }

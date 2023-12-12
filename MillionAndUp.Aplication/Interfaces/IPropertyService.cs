@@ -3,7 +3,7 @@
 namespace MillionAndUp.Aplication.Interfaces
 {
     /// <summary>
-    /// Interface to implement in the owner service
+    /// Interface to implement in the property service
     /// </summary>
     public interface IPropertyService
     {
