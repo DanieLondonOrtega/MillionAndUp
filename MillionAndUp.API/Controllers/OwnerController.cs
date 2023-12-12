@@ -26,7 +26,7 @@ namespace MillionAndUp.API.Controllers
 
         /// <summary>
         /// Gets all property owners
-        /// </summary>
+        /// </summary>        
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -48,7 +48,7 @@ namespace MillionAndUp.API.Controllers
         /// Insert a new Owner
         /// </summary>
         [HttpPost]
-        public IActionResult Post([FromBody] OwnerModel request)
+        public IActionResult Post([FromForm] OwnerModel request)
         {
             var objRequest = _mapper.Map<OwnerDto>(request);
             return Ok(_service.Post(objRequest));
@@ -58,7 +58,7 @@ namespace MillionAndUp.API.Controllers
         /// Update information Owner
         /// </summary>
         [HttpPut]
-        public IActionResult Put([FromBody] OwnerUpdateModel request)
+        public IActionResult Put([FromForm] OwnerUpdateModel request)
         {
             var objRequest = _mapper.Map<OwnerDto>(request);
             return Ok(_service.Put(objRequest));

@@ -28,7 +28,7 @@ namespace MillionAndUp.Aplication.Services
         public bool Post(UserDto entity)
         {
             if (entity == null)
-                throw new ArgumentNullException("User is requerid");
+                throw new ArgumentNullException(String.Format(Constants.Constants.EntityIsRequerid,"User"));
             var obj = _mapper.Map<User>(entity);
             return _userRepository.Add(obj);
         }

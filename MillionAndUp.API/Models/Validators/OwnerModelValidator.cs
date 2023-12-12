@@ -19,7 +19,17 @@ namespace MillionAndUp.API.Models.Validators
 
             RuleFor(x => x.Birthday)
                 .NotEmpty()
-                .NotNull();              
+                .NotNull();
+
+            RuleFor(x => x.File.Length)
+                .NotNull()
+                .LessThanOrEqualTo(10000000)
+                .WithMessage("File size is larger than allowed");
+
+            RuleFor(x => x.File.ContentType)
+                .NotNull()
+                .Must(x => x.Contains("image/jpeg") || x.Contains("image/png") || x.Contains("image/jpg"))
+                .WithMessage("File type is not allowed");
         }
     }
 }

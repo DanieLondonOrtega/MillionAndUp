@@ -59,14 +59,12 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
-
 builder.Services.AddDbContext<EntityDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MillionAndUpBDConnection"))
 );
-
+builder.Services.AddSingleton<IAzureBlobStorageService,AzureBlobStorageService>();
 builder.Services.AddScoped<IOwnerService, OwnerService>();
 builder.Services.AddTransient(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<OwnerModelValidator>();

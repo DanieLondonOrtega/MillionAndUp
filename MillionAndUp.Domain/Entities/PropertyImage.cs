@@ -10,7 +10,7 @@ namespace MillionAndUp.Domain.Entities
     {
         public Guid IdPropertyImage { get; set; }
         public Guid IdProperty { get; set; }
-        public byte[] File { get; set; }
+        public string File { get; set; }
         public bool Enabled { get; set; }
         public Property Property { get; set; }
     }
